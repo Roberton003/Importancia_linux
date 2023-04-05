@@ -1,0 +1,133 @@
+#um exemplo de um playbook Ansible simples que instala e configura um
+#servidor web Apache em um servidor remoto:"
+---
+- name: Instalação e configuração do servidor web Apache
+  hosts: web_servers
+  become: true
+  vars:
+    http_port: 80
+    https_port: 443
+    document_root: "/var/www/html"
+  tasks:
+    - name: Instalação do Apache
+      apt:
+        name: apache2
+        state: latest
+    - name: Configuração do Apache
+      template:
+        src: templates/apache2.conf.j2
+        dest: /etc/apache2/apache2.conf
+      notify:
+        - Restart Apache
+    - name: Configuração do virtual host
+      template:
+        src: templates/virtual_host.conf.j2
+        dest: /etc/apache2/sites-available/default-ssl.conf
+      notify:
+        - Restart Apache
+    - name: Criação do diretório raiz do documento
+      file:
+        path: "{{ document_root }}"
+        state: directory
+    - name: Configuração do arquivo index.html
+      copy:
+        content: "Hello World from Ansible!"
+        dest: "{{ document_root }}/index.html"
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+
+
+#O playbook pode ser executado com o seguinte comando:
+
+# ansible-playbook apache2.yaml
+
+# um exemplo de playbook que provisiona servidores, instala e configura pacotes, implanta um aplicativo, configura um firewall e orquestra a infraestrutura:
+---
+- name: Provisionamento e implantação de aplicativo
+  hosts: all
+  become: true
+  vars:
+    app_name: myapp
+    app_version: 1.0
+    http_port: 80
+    https_port: 443
+    db_host: db.example.com
+    db_port: 3306
+    db_name: myappdb
+    db_user: myappuser
+    db_password: mypassword
+  tasks:
+    - name: Provisionamento de servidores
+      include_role:
+        name: provision
+    - name: Instalação de pacotes
+      include_role:
+        name: install_packages
+    - name: Implantação do aplicativo
+      include_role:
+        name: deploy_app
+    - name: Configuração do firewall
+      include_role:
+        name: configure_firewall
+    - name: Orquestração da infraestrutura
+      include_role:
+        name: orchestrate
+
+
+#Aqui está um exemplo simplificado de playbook que provisiona servidores e instala pacotes:
+
+---
+- name: Provisionamento de servidores e instalação de pacotes
+  hosts: all
+  become: true
+  vars:
+    packages:
+      - nginx
+      - mysql-server
+      - php
+      - php-fpm
+  tasks:
+    - name: Provisionamento de servidores
+      include_role:
+        name: provision
+    - name: Instalação de pacotes
+      apt:
+        name: "{{ packages }}"
+        state: latest
+
+#Este playbook define uma variável de pacotes que contém uma lista de pacotes a serem instalados e chama dois papéis personalizados.
+
+---
+- name: Provisionamento e implantação de aplicativo
+  hosts: all
+  become: true
+  vars:
+    app_name: myapp
+    app_version: 1.0
+    http_port: 80
+    https_port: 443
+    db_host: db.example.com
+    db_port: 3306
+    db_name: myappdb
+    db_user: myappuser
+    db_password: mypassword
+  tasks:
+    - name: Provisionamento de servidores
+      include_role:
+        name: provision
+    - name: Instalação de pacotes
+      include_role:
+        name: install_packages
+    - name: Implantação do aplicativo
+      include_role:
+        name: deploy_app
+    - name: Configuração do firewall
+      include_role:
+        name: configure_firewall
+    - name: Orquestração da infraestrutura
+      include_role:
+        name: orchestrate
+

@@ -1,0 +1,21 @@
+Para trabalhar com Ansible e Terraform no Linux, é necessário conhecer alguns comandos básicos do sistema operacional que ajudam a executar as tarefas necessárias. Aqui estão alguns dos principais comandos no Linux para trabalhar com Ansible e Terraform:
+
+cd: Este comando é usado para mudar o diretório atual. É útil para navegar para o diretório onde o código do Ansible ou Terraform está localizado.
+
+ls: Este comando é usado para listar o conteúdo do diretório atual. Isso ajuda a verificar se os arquivos necessários estão presentes no diretório em que você está trabalhando.
+
+mkdir: Este comando é usado para criar um novo diretório. Isso é útil para organizar seus projetos e separar seus códigos do Ansible e Terraform.
+
+rm: Este comando é usado para remover arquivos e diretórios. Isso é útil quando você precisa excluir arquivos antigos ou não utilizados.
+
+nano/vi: Estes são editores de texto que podem ser usados para criar, editar e visualizar arquivos de configuração para o Ansible e o Terraform.
+
+ansible-playbook: Este é o comando para executar um playbook Ansible. É usado para automatizar tarefas em servidores remotos.
+
+terraform init: Este comando é usado para inicializar um projeto do Terraform. Ele instala e configura os plugins necessários e prepara o ambiente para a execução do projeto.
+
+terraform plan: Este comando é usado para criar um plano de execução do Terraform. Ele verifica o código do Terraform e gera um plano de execução para a criação ou atualização da infraestrutura.
+
+terraform apply: Este comando é usado para executar um plano de execução gerado pelo Terraform. Ele cria ou atualiza a infraestrutura de acordo com o plano de execução.
+
+Esses são apenas alguns dos principais comandos no Linux para trabalhar com Ansible e Terraform. É importante lembrar que existem muitos outros comandos úteis que podem ser usados dependendo do projeto e da situação.
